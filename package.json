@@ -1,0 +1,40 @@
+{
+  "name": "rxjs",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "if test -d dist/; then rm -r dist; fi",
+    "build:prod": "NODE_ENV='prod' webpack -p --progress",
+    "serve": "webpack-dev-server --inline"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.2.0",
+    "zone.js": "^0.8.2"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.36",
+    "@types/jasmine": "^2.5.36",
+    "@types/node": "^7.0.8",
+    "awesome-typescript-loader": "^3.1.2",
+    "css-loader": "^0.27.1",
+    "file-loader": "^0.10.1",
+    "html-loader": "0.4.5",
+    "html-webpack-plugin": "^2.21.0",
+    "node-sass": "^4.5.0",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.14.0",
+    "ts-loader": "2.0.1",
+    "tslint": "^4.5.1",
+    "typescript": "2.2.1",
+    "webpack": "1.13.1",
+    "webpack-dev-server": "1.14.1"
+  }
+}
