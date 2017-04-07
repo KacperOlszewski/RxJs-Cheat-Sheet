@@ -11,18 +11,8 @@ export function demo() {
         .debounceTime(700)
         .switchMap(somePromise);
 
-    const stream = new Observable((observer) => {
-        observer.next('waaat')
-    });
-
     button.addEventListener('click', () => {
-        stream
-            .map(n => n + ' puss')
-            .subscribe(
-                (n) => {
-                    console.log(n);
-                }
-            );
+        console.log('classic event listener');
     });
 
     buttonStream.subscribe(
@@ -37,9 +27,11 @@ export function demo() {
 const somePromise = (element: string) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            const result = element + 'async';
-
-            resolve(result)
+            if (element !== 'error') {
+                resolve(element+ 'from Promise')
+            } else {
+                reject(new Error(element))
+            }
         }, 1000)
     })
 };
