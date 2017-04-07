@@ -14,6 +14,10 @@ module.exports = {
   module: {
     loaders: loaders
   },
+  devtool: 'source-map',
+  resolve: {
+    extensions: ['', '.js', '.ts', '.html']
+  },
   plugins: plugins,
   devServer: {
     host: '127.0.0.1',

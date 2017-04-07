@@ -1,20 +1,16 @@
-import 'core-js';
-import 'zone.js/dist/zone';
+import { demo as buttonStreamDemo } from "./buttonListener/buttonListenerVSbuttonStream";
+import { showDemo as generatorIteratorDemo } from "./generators&iterators/demo";
+import { intervalDemo } from './1.basicObservable/basicObservable';
+import { takeDemo } from './1.basicObservable/customTakeImplementation';
+import { demo as buildInFeatures } from './2.buildInFunctions/demo';
 
-import { Observable } from 'rxjs';
+/*
+buttonStreamDemo();
+generatorIteratorDemo();
 
-const button: HTMLElement = document.getElementById('btn1');
-const stream = new Observable((observer) => {
-    observer.next('waaat')
-});
+intervalDemo();
+takeDemo();
+*/
 
-button.addEventListener('click', () => {
-    stream
-        .map(n => n +' puss')
-        .subscribe(
-            (n) => {
-                console.log(n);
-            }
-        );
-});
-
+//buildInFeatures();
+buttonStreamDemo();
