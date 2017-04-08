@@ -21,23 +21,22 @@ export class SnapshotCamera {
 
     stream: MediaStream;
 
-    width = 400;
+    initWidth = 400;
 
-    height = 500;
+    initHeight = 500;
 
     startSnapshot() {
-        const { canvas, video, width, height } = this;
-        canvas.width = canvas.height = 0;
+        const { canvas, video, initWidth, initHeight } = this;
 
-        canvas.hidden = true;
-        video.hidden = false;
+        this.setElementDisplay(canvas, false);
+        this.setElementDisplay(video, true);
 
         this.nativeNavigator
             .getUserMedia({
                 audio: false,
                 video: {
-                    width: width,
-                    height: height
+                    width: initWidth,
+                    height: initHeight
                 }
             },
             (stream: MediaStream) => {
@@ -56,7 +55,9 @@ export class SnapshotCamera {
         this.buttonStart.innerText = 'Turn Camera ON';
         this.buttonEnd.innerText = 'Turn Camera OFF';
         this.video.style.cursor = 'pointer';
-        input.hidden = true;
+        this.setElementDisplay(input, false);
+        this.setElementDisplay(video, false);
+        this.setElementDisplay(canvas, false);
 
         this.buttonStart.addEventListener('click', this.startSnapshot.bind(this));
         this.buttonEnd.addEventListener('click', this.stopSnapshot.bind(this));
@@ -68,20 +69,24 @@ export class SnapshotCamera {
             this.stream.getTracks().forEach(track => track.stop());
             this.stream = null;
         }
-        this.video.src = null;
+        this.setElementDisplay(video, false);
+    }
+
+    setElementDisplay(elem: HTMLElement, isBlock: boolean) {
+        isBlock ?
+            elem.style.display = 'block':
+            elem.style.display = 'none';
     }
 
     takeSnapshot() {
         const { canvas, video } = this;
         this.snapId++;
-
-        canvas.hidden = false;
-        video.hidden = true;
-
+        this.setElementDisplay(canvas, true);
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
-
         canvas.onclick = () => this.startSnapshot();
+
+        this.setElementDisplay(video, false);
 
         const context = canvas.getContext('2d');
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
