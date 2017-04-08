@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import {createSubscriber} from "../helpers/createSubscriber";
+import {printResults} from "../helpers/captureHTMLelements";
 
 class BackendResponse {
     constructor(
@@ -30,6 +31,6 @@ export function LongPoolingDemo() {
     longPooling$
         .map((resp: BackendResponse) => resp.data)
         .subscribe(
-            createSubscriber('longPooling')
+            createSubscriber('longPooling', printResults)
         );
 }
