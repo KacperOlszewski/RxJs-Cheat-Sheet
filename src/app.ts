@@ -6,7 +6,8 @@ import { demo as buildInFeatures } from './2.buildInFunctions/demo';
 import { LongPoolingDemo } from './4.long-pooling-example/long-pooling';
 import { demo as switchMapVSFlatMap } from './5.merge-map-vs-switch-map/merge-map-vs-switch-map';
 import { demo as SubjectDemo } from './3.subjects/subject';
-import { demo as SpeechApiDemo } from './6.speech-api-example/speech'
+import { demo as SpeechApiDemo } from './6.speech-api-example/speech';
+import { SnapshotCamera } from './7.camera-snap-example/camera-snap';
 
 //FromEventDemo();
 //generatorIteratorDemo();
@@ -16,6 +17,8 @@ import { demo as SpeechApiDemo } from './6.speech-api-example/speech'
 //LongPoolingDemo();
 //switchMapVSFlatMap();
 //SubjectDemo();
-SpeechApiDemo();
+//SpeechApiDemo();
 
 
+
+new SnapshotCamera().setEventListeners();
