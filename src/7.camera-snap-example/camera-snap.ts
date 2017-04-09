@@ -1,29 +1,47 @@
-import {canvas, video, button2, button, input, container} from '../helpers/captureHTMLelements';
+import {lazyCaptureHtmlElements} from '../helpers/captureHTMLelements';
+export const snapShotTemplate = require('./camera-span.html');
 
 function getNativeNavigator(): Navigator {
     return navigator
 }
 
-
 export class SnapshotCamera {
-
     snapId = 0;
 
     nativeNavigator: Navigator = getNativeNavigator();
 
-    video: HTMLVideoElement = video;
+    video: HTMLVideoElement;
 
-    canvas: HTMLCanvasElement = canvas;
+    canvas: HTMLCanvasElement;
 
-    buttonStart: HTMLButtonElement = button;
+    buttonStart: HTMLButtonElement;
 
-    buttonEnd: HTMLButtonElement = button2;
+    buttonEnd: HTMLButtonElement;
+
+    container: HTMLElement;
 
     stream: MediaStream;
 
     initWidth = 400;
 
     initHeight = 500;
+
+    constructor() {
+        this.captureHTMLElements();
+        this.setEventListeners();
+    }
+
+    captureHTMLElements() {
+        const elements = lazyCaptureHtmlElements();
+
+        this.video = elements.video;
+        this.canvas = elements.canvas;
+        this.buttonStart = elements.button;
+        this.buttonEnd = elements.button2;
+        this.container = elements.container;
+
+        console.log(elements);
+    }
 
     startSnapshot() {
         const { canvas, video, initWidth, initHeight } = this;
@@ -55,9 +73,9 @@ export class SnapshotCamera {
         this.buttonStart.innerText = 'Turn Camera ON';
         this.buttonEnd.innerText = 'Turn Camera OFF';
         this.video.style.cursor = 'pointer';
-        this.setElementDisplay(input, false);
-        this.setElementDisplay(video, false);
-        this.setElementDisplay(canvas, false);
+
+        this.setElementDisplay(this.video, false);
+        this.setElementDisplay(this.canvas, false);
 
         this.buttonStart.addEventListener('click', this.startSnapshot.bind(this));
         this.buttonEnd.addEventListener('click', this.stopSnapshot.bind(this));
@@ -69,7 +87,7 @@ export class SnapshotCamera {
             this.stream.getTracks().forEach(track => track.stop());
             this.stream = null;
         }
-        this.setElementDisplay(video, false);
+        this.setElementDisplay(this.video, false);
     }
 
     setElementDisplay(elem: HTMLElement, isBlock: boolean) {
@@ -104,6 +122,6 @@ export class SnapshotCamera {
         element.setAttribute('download', name);
         element.innerText = 'Download: '+ name;
 
-        container.appendChild(element);
+        this.container.appendChild(element);
     }
 }

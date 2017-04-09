@@ -7,7 +7,8 @@ import { LongPoolingDemo } from './4.long-pooling-example/long-pooling';
 import { demo as switchMapVSFlatMap } from './5.merge-map-vs-switch-map/merge-map-vs-switch-map';
 import { demo as SubjectDemo } from './3.subjects/subject';
 import { demo as SpeechApiDemo } from './6.speech-api-example/speech';
-import { SnapshotCamera } from './7.camera-snap-example/camera-snap';
+import { SnapshotCamera, snapShotTemplate } from './7.camera-snap-example/camera-snap';
+import { Router } from './8.router/router';
 
 //FromEventDemo();
 //generatorIteratorDemo();
@@ -20,5 +21,11 @@ import { SnapshotCamera } from './7.camera-snap-example/camera-snap';
 //SpeechApiDemo();
 
 
-
-new SnapshotCamera().setEventListeners();
+new SnapshotCamera();
+new Router('router-outlet',
+    [
+        {path: '/', template: 'co tam'},
+        {path: '/page1', template: '<h2>Interval Demo</h2>', controller: intervalDemo},
+        {path: '/page2', template: snapShotTemplate, controller: SnapshotCamera}
+    ]
+);
