@@ -3,16 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Rxjs</title>
+    <style>
+        .nav, .main {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .nav {
+            width: 300px;
+        }
+        .main {
+            width: calc(100% - 305px);
+        }
+    </style>
 </head>
 <body>
-    <h1>RxJS</h1>
+    <div class="nav">
+        <h1>RxJS</h1>
 
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#/page1">Page 1</a></li>
-        <li><a href="#/page2">Page 2</a></li>
-    </ul>
+        <ul>
+            <li><a href="#">Basic Observable Interval</a></li>
+            <li><a href="#/page1">Custom Take Demo</a></li>
+            <li><a href="#/page2">Rx Features</a></li>
+            <li><a href="#/page3">Subjects</a></li>
+            <li><a href="#/page4">Long Pooling Demo</a></li>
+            <li><a href="#/page5">MergeMap vs SwitchMap</a></li>
+            <li><a href="#/page8">Observable fromEvent Demo</a></li>
+            <li><a href="#/page9">Generators & Iterators Demo</a></li>
+            <li><a href="#/page10">Speech API</a></li>
+            <li><a href="#/page11">Snap Camera</a></li>
+        </ul>
+    </div>
 
-    <div id="router-outlet"></div>
+    <div class="main" id="router-outlet"></div>
 </body>
 </html>

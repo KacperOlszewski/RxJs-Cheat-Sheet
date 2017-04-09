@@ -15,13 +15,13 @@ const inside = (x: number) => {
 };
 
 function switchMap() {
-    outer('switchMap')
+    outer('switchMap - switches to last chained observable, completes previous observables')
         .switchMap(inside)
         .subscribe(createSubscriber('switchMap'));
 }
 
 function mergeMap() {
-    outer('mergeMap (aka flatMap)')
+    outer('mergeMap (aka flatMap) - flattens all observables')
         .mergeMap(inside)
         .subscribe(createSubscriber('mergeMap'));
 }

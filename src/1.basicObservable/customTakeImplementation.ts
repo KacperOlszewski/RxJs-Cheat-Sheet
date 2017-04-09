@@ -3,7 +3,6 @@ import { createInterval } from "./basicObservable";
 import { createSubscriber } from "../helpers/createSubscriber";
 
 export function take(sourceObservable: Observable<any>, amount: number) {
-
     return new Observable((observer) => {
         let count = 0;
 

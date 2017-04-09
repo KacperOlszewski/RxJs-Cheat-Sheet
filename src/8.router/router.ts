@@ -1,6 +1,6 @@
 import {Observable} from "rxjs";
 
-interface Route {
+export interface Route {
     path: string;
     template: string;
     controller?: Function;
@@ -8,6 +8,7 @@ interface Route {
 
 export class Router {
     private routes: any = {};
+    private defaultRoute: string;
     private routerOutletId: string;
     private routerOutlet: HTMLElement;
     private oldUrl: string;
@@ -24,10 +25,13 @@ export class Router {
         router
             .do(() => this.setOutlet())
             .do(event => this.setLastUrl(event))
-            .subscribe(event => this.reRoute())
+            .map(event => this.mapHash())
+            .subscribe(hash => this.reRoute(hash))
     }
 
     private registerRoutes(routes: Route[]) {
+        this.defaultRoute = routes[0].path;
+
         routes.forEach(({path, template, controller}) => {
             this.routes[path] = {
                 template: template,
@@ -38,13 +42,14 @@ export class Router {
 
     private setLastUrl(e: HashChangeEvent) {
         this.oldUrl = e.oldURL || null;
-
-        console.log(this.oldUrl);
     }
 
-    private reRoute() {
-        const url = location.hash.slice(1) || '/';
-        const currentRoute = this.routes[url] || this.routes[0];
+    private mapHash() {
+        return location.hash.slice(1) || '/';
+    }
+
+    private reRoute(hash: string) {
+        const currentRoute = this.routes[hash] || this.routes[this.defaultRoute];
 
         this.routerOutlet.innerHTML = currentRoute.template;
         if (typeof currentRoute.controller === 'function') {

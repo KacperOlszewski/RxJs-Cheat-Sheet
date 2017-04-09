@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
 import {createSubscriber} from "../helpers/createSubscriber";
-import {printResults} from "../helpers/captureHTMLelements";
 
 class BackendResponse {
     constructor(
@@ -11,6 +10,7 @@ class BackendResponse {
 
 export function LongPoolingDemo() {
     let backendQueue = 0;
+    const successResponseAfter = 4;
     const intervalTime = 500;
 
     const someHttpMock = () => {
@@ -18,8 +18,8 @@ export function LongPoolingDemo() {
 
         return Observable.of(
             new BackendResponse(
-                'someData: '+backendQueue,
-                backendQueue > 3
+                `returns data after ${backendQueue} hits`,
+                backendQueue >= successResponseAfter
             )
         )
     };
@@ -31,6 +31,6 @@ export function LongPoolingDemo() {
     longPooling$
         .map((resp: BackendResponse) => resp.data)
         .subscribe(
-            createSubscriber('longPooling', printResults)
+            createSubscriber('longPooling')
         );
 }

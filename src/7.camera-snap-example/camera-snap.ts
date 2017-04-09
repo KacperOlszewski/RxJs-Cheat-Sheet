@@ -1,14 +1,10 @@
 import {lazyCaptureHtmlElements} from '../helpers/captureHTMLelements';
 export const snapShotTemplate = require('./camera-span.html');
 
-function getNativeNavigator(): Navigator {
-    return navigator
-}
-
 export class SnapshotCamera {
     snapId = 0;
 
-    nativeNavigator: Navigator = getNativeNavigator();
+    nativeNavigator: Navigator = this.getNativeNavigator();
 
     video: HTMLVideoElement;
 
@@ -39,8 +35,6 @@ export class SnapshotCamera {
         this.buttonStart = elements.button;
         this.buttonEnd = elements.button2;
         this.container = elements.container;
-
-        console.log(elements);
     }
 
     startSnapshot() {
@@ -88,6 +82,7 @@ export class SnapshotCamera {
             this.stream = null;
         }
         this.setElementDisplay(this.video, false);
+        this.video.src = '';
     }
 
     setElementDisplay(elem: HTMLElement, isBlock: boolean) {
@@ -123,5 +118,9 @@ export class SnapshotCamera {
         element.innerText = 'Download: '+ name;
 
         this.container.appendChild(element);
+    }
+
+    getNativeNavigator(): Navigator {
+        return navigator
     }
 }
