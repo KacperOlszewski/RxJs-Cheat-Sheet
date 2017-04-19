@@ -5,11 +5,14 @@ import { demo as buildInFeatures } from './2.buildInFunctions/demo';
 import { demo as SubjectDemo } from './3.subjects/subject';
 import { LongPoolingDemo } from './4.long-pooling-example/long-pooling';
 import { demo as switchMapVSFlatMap } from './5.merge-map-vs-switch-map/merge-map-vs-switch-map';
+import { PausableObservable, pausableTemplate } from './9.pausable-observable/pausable-observable';
+
 import { showDemo as generatorIteratorDemo } from "./generators&iterators/demo";
 import { demo as FromEventDemo, fromEventTemplate } from "./from-event-observable-example/from-event-observable-example";
 import { SpeechApi, speechTemplate } from './6.speech-api-example/speech';
 import { SnapshotCamera, snapShotTemplate } from './7.camera-snap-example/camera-snap';
 import { Router, Route } from './8.router/router';
+import { printTemplate, demo as printDemo } from "./printServiceExample/print-service";
 
 
 
@@ -20,11 +23,13 @@ const routes: Route[] = [
     {path: '/page3', template: createTitle('Subjects'), controller: SubjectDemo},
     {path: '/page4', template: createTitle('Long Pooling Demo'), controller: LongPoolingDemo},
     {path: '/page5', template: createTitle('mergeMap vs SwitchMap'), controller: switchMapVSFlatMap},
+    {path: '/page6', template: pausableTemplate, controller: PausableObservable},
 
     {path: '/page8', template: createTitle(fromEventTemplate), controller: FromEventDemo},
     {path: '/page9', template: createTitle('Generators & Iterators Demo'), controller: generatorIteratorDemo},
     {path: '/page10', template: speechTemplate, controller: SpeechApi},
-    {path: '/page11', template: snapShotTemplate, controller: SnapshotCamera}
+    {path: '/page11', template: snapShotTemplate, controller: SnapshotCamera},
+    {path: '/page12', template: printTemplate, controller: printDemo}
 ];
 
 new Router('router-outlet', routes);

@@ -63,7 +63,7 @@ export function demo() {
             observable.unsubscribe();
         };
         container.appendChild(element);
-    }
+    };
 
     FromEventdemo();
 
@@ -73,4 +73,3 @@ export function demo() {
 
     addUnsubscrubeButton('button', wrappedEvent)
 }
-
